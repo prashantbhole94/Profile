@@ -1,267 +1,1267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prashant Bhole | Portfolio Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            background-color: #0b0f19;
-        }
-        .dashboard-card {
-            background-color: #111827;
-            border: 1px solid #1f2937;
-        }
-        .orange-glow {
-            color: #ff7a00;
-        }
-        .border-orange-accent {
-            border-color: #ff7a00;
-        }
-        .bg-orange-accent {
-            background-color: #ff7a00;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Prashant Bhole — Profile Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    /* Electric & Vibrant Theme */
+    --bg: #09090b; 
+    --surface: rgba(24, 24, 27, 0.6); 
+    --surface2: rgba(39, 39, 42, 0.6);
+    --border: rgba(255, 255, 255, 0.1);
+    --accent: #00f2fe;   
+    --accent2: #c471ed;  
+    --accent3: #10b981;  
+    --text: #f8fafc;
+    --muted: #a1a1aa;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    background-color: var(--bg);
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(0, 242, 254, 0.1) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(196, 113, 237, 0.1) 0px, transparent 50%);
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    position: relative;
+    padding: 48px 48px 36px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 32px;
+    overflow: hidden;
+  }
+  .header-left { flex: 1; z-index: 2; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .16em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+  }
+  
+  h1 span { 
+    background: linear-gradient(270deg, var(--accent), var(--accent2), var(--accent3), var(--accent));
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 6s ease infinite;
+  }
+  
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .tagline {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.6;
+  }
+  .badges {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 18px;
+  }
+  .badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .08em;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(4px);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .badge:hover {
+      transform: translateY(-2px);
+  }
+  .badge-cyan   { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 10px rgba(0, 242, 254, 0.2); }
+  .badge-purple { border-color: var(--accent2); color: var(--accent2); box-shadow: 0 0 10px rgba(196, 113, 237, 0.2); }
+  .badge-green  { border-color: var(--accent3); color: var(--accent3); box-shadow: 0 0 10px rgba(16, 185, 129, 0.2); }
+  
+  .header-right {
+    display: flex; flex-direction: column; gap: 8px;
+    align-items: flex-end; min-width: 180px; z-index: 2;
+  }
+  .contact-item {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+    text-decoration: none; /* Added to keep links clean */
+  }
+  .contact-item:hover { color: var(--text); }
+  .contact-item .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  /* ── CUSTOM CV DOWNLOAD BUTTON ── */
+  .cv-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(196, 113, 237, 0.1);
+    border: 1px solid var(--accent2);
+    color: var(--text);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 8px;
+    transition: all 0.3s;
+    box-shadow: inset 0 0 10px rgba(196, 113, 237, 0.1);
+  }
+  .cv-download-btn:hover {
+    background: rgba(196, 113, 237, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(196, 113, 237, 0.3);
+    border-color: var(--accent);
+  }
+  .cv-download-btn svg {
+    transition: transform 0.3s;
+  }
+  .cv-download-btn:hover svg {
+    transform: translateY(2px);
+  }
+
+  /* ── GRID & GLASSMORPHISM CARDS ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+    padding: 24px 48px 48px;
+  }
+  .card {
+    background: var(--surface);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  .card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 242, 254, 0.15);
+    border-color: rgba(0, 242, 254, 0.3);
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .card:hover::after { opacity: 1; }
+  
+  .card-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title::before {
+    content: '';
+    display: inline-block;
+    width: 12px; height: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 5px var(--accent);
+  }
+
+  /* ── KPI ROW ── */
+  .kpi-row { grid-column: span 12; display: flex; gap: 16px; }
+  .kpi {
+    flex: 1;
+    height: 148px;
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+    perspective: 1000px;
+  }
+  .kpi-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+  .kpi.flipped .kpi-inner { transform: rotateY(180deg); }
+  .kpi-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    background: var(--surface);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    overflow: hidden;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .kpi:hover .kpi-face { 
+      border-color: rgba(196, 113, 237, 0.5); 
+      box-shadow: 0 0 20px rgba(196, 113, 237, 0.1);
+  }
+  .kpi-back {
+    transform: rotateY(180deg);
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(39, 39, 42, 0.8), rgba(24, 24, 27, 0.9));
+  }
+  .kpi-tap-hint {
+    position: absolute;
+    bottom: 10px; right: 12px;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    opacity: 0.5;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .kpi:hover .kpi-tap-hint { opacity: 1; color: var(--accent); }
+  .kpi-value {
+    font-family: var(--mono);
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text);
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+  }
+  .kpi-value span { color: var(--accent); font-size: 22px; }
+  .kpi-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    letter-spacing: .03em;
+  }
+  .kpi-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent3);
+    margin-top: 8px;
+  }
+  .kpi-glow {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196, 113, 237, 0.2), transparent 70%);
+  }
+  .kpi-back-eyebrow {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .kpi-back-list {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    justify-content: center;
+  }
+  .kpi-back-pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 4px 9px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: rgba(0,0,0,0.4);
+  }
+  .kpi-back-text {
+    font-size: 11px;
+    line-height: 1.55;
+    color: #e2e8f0;
+    text-align: left;
+  }
+  .kpi-back-text strong { color: var(--accent); }
+
+  /* ── EXPERIENCE ── */
+  .exp-card { grid-column: span 7; }
+  .timeline { position: relative; }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 0 16px;
+    margin-bottom: 24px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+  .tl-item:hover { background: rgba(255,255,255,0.03); }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-left {
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .tl-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    flex-shrink: 0;
+    margin-top: 4px;
+    transition: background 0.3s;
+  }
+  .tl-item:hover .tl-dot { background: var(--accent); }
+  .tl-dot.muted {
+    border-color: var(--muted);
+    box-shadow: none;
+  }
+  .tl-line {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(to bottom, var(--border), transparent);
+    margin: 4px 0 0;
+  }
+  .tl-company {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .tl-role {
+    font-size: 11px;
+    color: var(--accent2);
+    font-family: var(--mono);
+    margin-top: 2px;
+  }
+  .tl-period {
+    font-size: 10px;
+    color: var(--muted);
+    font-family: var(--mono);
+    margin-top: 2px;
+  }
+  .tl-details {
+    margin-top: 8px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+  }
+  .tl-item.open .tl-details { max-height: 400px; }
+  .tl-pill {
+    display: inline-block;
+    font-size: 10px;
+    font-family: var(--mono);
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--accent3);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    margin: 4px 4px 0 0;
+  }
+  .expand-hint {
+    font-size: 10px;
+    color: var(--muted);
+    font-family: var(--mono);
+    margin-top: 4px;
+    transition: color .2s;
+  }
+  .tl-item:hover .expand-hint { color: var(--accent); }
+
+  /* ── SKILLS RADAR ── */
+  .skills-card { grid-column: span 5; }
+  .skill-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px;
+  }
+  .skill-name {
+    font-size: 11px;
+    color: var(--text);
+    width: 160px;
+    flex-shrink: 0;
+    font-family: var(--mono);
+  }
+  .skill-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+  }
+  .skill-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+    box-shadow: 0 0 10px var(--accent);
+  }
+  .skill-pct {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    width: 30px;
+    text-align: right;
+    font-weight: bold;
+  }
+
+  /* ── IMPACT ── */
+  .impact-card { grid-column: span 5; }
+  .impact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .impact-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .impact-item:hover { 
+      border-color: var(--accent3); 
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.15);
+      background: rgba(16, 185, 129, 0.05);
+  }
+  .impact-num {
+    font-family: var(--mono);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent3);
+    line-height: 1;
+    text-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+  }
+  .impact-desc {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  /* ── AI PROMPT CARD ── */
+  .ai-card {
+    grid-column: span 7;
+  }
+  .terminal {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+  }
+  .terminal-bar {
+    background: rgba(255,255,255,0.05);
+    padding: 10px 12px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .t-dot { width: 12px; height: 12px; border-radius: 50%; }
+  .t-dot.r { background: #ff5f57; box-shadow: 0 0 5px #ff5f57; }
+  .t-dot.y { background: #febc2e; box-shadow: 0 0 5px #febc2e; }
+  .t-dot.g { background: #28c840; box-shadow: 0 0 5px #28c840; }
+  .t-label { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-left: 8px; }
+  .terminal-body { padding: 18px; }
+  .term-line {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.8;
+    color: #e2e8f0;
+    white-space: pre-wrap;
+  }
+  .term-line .prompt { color: var(--accent2); }
+  .term-line .cmd    { color: var(--accent); }
+  .term-line .out    { color: var(--muted); }
+  .term-line .hi     { color: var(--accent); }
+  .term-line .str    { color: var(--accent3); }
+  .cursor {
+    display: inline-block;
+    width: 8px; height: 14px;
+    background: var(--accent);
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+    box-shadow: 0 0 5px var(--accent);
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .ask-input-wrap {
+    display: flex; gap: 10px; margin-top: 16px;
+  }
+  .ask-input {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text);
+    outline: none;
+    transition: all 0.3s;
+  }
+  .ask-input:focus { 
+      border-color: var(--accent); 
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+  }
+  .ask-btn {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-family: var(--mono);
+    font-size: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .ask-btn:hover { 
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(196, 113, 237, 0.4);
+  }
+  .ask-btn:disabled { opacity: .4; cursor: default; transform: none; box-shadow: none; }
+  .ai-response {
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--muted);
+    min-height: 0;
+    white-space: pre-wrap;
+  }
+  .ai-response .ai-tag { color: var(--accent); font-weight: bold; }
+  .typing-indicator span {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin: 0 2px;
+    animation: bounce 0.8s infinite;
+  }
+  .typing-indicator span:nth-child(2) { animation-delay: .15s; }
+  .typing-indicator span:nth-child(3) { animation-delay: .3s; }
+  @keyframes bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
+
+  /* ── AWARDS / CERTIFICATIONS ── */
+  .awards-card { grid-column: span 12; }
+  .awards-row { display: flex; gap: 16px; }
+  .award-item {
+    flex: 1;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    display: flex; align-items: flex-start; gap: 16px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s;
+  }
+  .award-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent2);
+    box-shadow: 0 8px 20px rgba(196, 113, 237, 0.15);
+    background: rgba(196, 113, 237, 0.05);
+  }
+  .award-icon { 
+    flex-shrink: 0; 
+    color: var(--accent2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(196, 113, 237, 0.1);
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px rgba(196, 113, 237, 0.2);
+  }
+  .award-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .award-desc { font-size: 11px; color: var(--muted); line-height: 1.6; }
+
+  /* ── EDU ── */
+  .edu-card { grid-column: span 12; }
+  .edu-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .edu-item {
+    flex: 1;
+    min-width: 200px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .edu-item:hover {
+      border-color: var(--accent);
+      background: rgba(0, 242, 254, 0.05);
+  }
+  .edu-school { font-size: 13px; font-weight: 600; color: var(--accent); }
+  .edu-degree { font-size: 12px; color: var(--text); margin-top: 6px; }
+  .edu-type { font-size: 10px; font-family: var(--mono); color: var(--muted); margin-top: 6px; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px) {
+    .header { flex-direction: column; padding: 32px 24px; gap: 20px; }
+    .header-right { align-items: flex-start; }
+    .grid { grid-template-columns: 1fr; padding: 16px 24px 40px; gap: 14px; }
+    .kpi-row { grid-column: span 1; flex-wrap: wrap; gap: 12px; }
+    .kpi { flex: 1 1 calc(50% - 6px); min-width: calc(50% - 6px); height: 138px; }
+    .exp-card, .skills-card, .impact-card, .ai-card, .awards-card, .edu-card { grid-column: span 1; }
+    .awards-row { flex-direction: column; }
+    .edu-row { flex-direction: column; }
+    .tl-item { grid-template-columns: 40px 1fr; }
+    .impact-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media(max-width:560px) {
+    .header { padding: 24px 18px; }
+    h1 { font-size: 26px; }
+    .tagline { font-size: 12px; }
+    .badges { gap: 6px; }
+    .badge { font-size: 9px; padding: 4px 10px; }
+    .grid { padding: 14px 16px 32px; gap: 12px; }
+    .card { padding: 18px; }
+
+    .kpi-row { flex-direction: column; gap: 10px; }
+    .kpi { flex: 0 0 auto; width: 100%; min-width: 100%; height: 124px; }
+    .kpi-face { padding: 16px 18px; }
+    .kpi-value { font-size: 28px; }
+    .kpi-value span { font-size: 18px; }
+    .kpi-label { font-size: 10px; }
+    .kpi-sub { font-size: 9px; }
+    .kpi-back-text { font-size: 10.5px; }
+    .kpi-back-pill { font-size: 9px; padding: 3px 7px; }
+    .kpi-tap-hint { display: none; }
+
+    .tl-item { grid-template-columns: 32px 1fr; gap: 0 10px; }
+    .tl-company { font-size: 12px; }
+    .tl-role { font-size: 10px; }
+
+    .skill-name { width: 110px; font-size: 10px; }
+
+    .impact-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .impact-item { padding: 12px; }
+    .impact-num { font-size: 22px; }
+    .impact-desc { font-size: 9px; }
+
+    .ask-input-wrap { flex-direction: column; }
+    .ask-btn { width: 100%; }
+
+    .award-item { flex-direction: column; gap: 12px; }
+    .edu-item { min-width: 100%; }
+
+    .modal-box { padding: 22px 20px; max-height: 85vh; }
+    .modal-title { font-size: 18px; }
+  }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 1000;
+    padding: 24px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--bg);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-top: 4px solid var(--accent);
+    border-radius: 12px;
+    max-width: 560px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 32px;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 1), 0 0 30px rgba(0, 242, 254, 0.1);
+    animation: modalIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to   { opacity: 1; transform: none; }
+  }
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    cursor: pointer;
+    padding: 6px 10px;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { 
+      color: var(--text); 
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+  }
+  .modal-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .modal-subtitle {
+    font-size: 13px;
+    color: var(--accent2);
+    margin-bottom: 20px;
+    font-family: var(--mono);
+  }
+  .modal-body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #d1d5db;
+  }
+  .modal-body p { margin-bottom: 16px; }
+  .modal-body p:last-child { margin-bottom: 0; }
+  .modal-body strong { color: var(--text); font-weight: 600; text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+</style>
 </head>
-<body class="text-slate-300 font-sans antialiased p-4 sm:p-8 md:p-12 max-w-7xl mx-auto space-y-8">
+<body>
 
-    <!-- HEADER BLOCK -->
-    <header class="flex flex-col md:flex-row justify-between items-start gap-6 border-b border-slate-800 pb-8">
+<!-- ── HEADER ── -->
+<div class="header">
+  <div class="header-left">
+    <h1>Prashant <span>Bhole</span></h1>
+    <div class="tagline">Senior IT Project Manager | Scrum Master<br>
+    Agile Leader · ERP Transformation · Agentic AI Delivery</div>
+    <div class="badges">
+      <span class="badge badge-cyan">Agile / Scrum</span>
+      <span class="badge badge-purple">SAP S/4HANA</span>
+      <span class="badge badge-green">Agentic AI</span>
+      <span class="badge badge-cyan">Jira / Azure DevOps</span>
+      <span class="badge badge-purple">RAID Governance</span>
+      <span class="badge badge-green">SAFe 6.0</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="contact-item"><div class="dot"></div>Pune, India</div>
+    <div class="contact-item"><div class="dot"></div>+91-7738119150</div>
+    <div class="contact-item"><div class="dot"></div>prashantbhole04@gmail.com</div>
+    
+    <!-- Updated LinkedIn Anchor Link -->
+    <a href="https://www.linkedin.com/in/prashant-bhole/" target="_blank" rel="noopener noreferrer" class="contact-item">
+      <div class="dot"></div>LinkedIn: prashant-bhole
+    </a>
+
+    <!-- New CV Download Button -->
+    <a href="Prashant_Bhole_CV.pdf" download="Prashant_Bhole_CV.pdf" class="cv-download-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      Download CV
+    </a>
+
+  </div>
+</div>
+
+<!-- ── MAIN GRID ── -->
+<div class="grid">
+
+  <!-- KPI ROW -->
+  <div class="kpi-row reveal">
+    <div class="kpi" onclick="flipKpi(this)">
+      <div class="kpi-inner">
+        <div class="kpi-face kpi-front">
+          <div class="kpi-value">10<span>+</span></div>
+          <div class="kpi-label">Years of Experience</div>
+          <div class="kpi-sub">↑ IT Project Mgmt & Scrum Master</div>
+          <div class="kpi-glow"></div>
+          <div class="kpi-tap-hint">tap for details →</div>
+        </div>
+        <div class="kpi-face kpi-back">
+          <div class="kpi-back-eyebrow">Expertise</div>
+          <div class="kpi-back-list">
+            <span class="kpi-back-pill">ERP Transformation</span>
+            <span class="kpi-back-pill">AI Products</span>
+            <span class="kpi-back-pill">Consulting</span>
+            <span class="kpi-back-pill">Financial Services</span>
+          </div>
+          <div class="kpi-tap-hint">tap to flip back →</div>
+        </div>
+      </div>
+    </div>
+    <div class="kpi" onclick="flipKpi(this)">
+      <div class="kpi-inner">
+        <div class="kpi-face kpi-front">
+          <div class="kpi-value">40<span>+</span></div>
+          <div class="kpi-label">Resources Led</div>
+          <div class="kpi-sub">↑ Cross-functional global teams</div>
+          <div class="kpi-glow"></div>
+          <div class="kpi-tap-hint">tap for details →</div>
+        </div>
+        <div class="kpi-face kpi-back">
+          <div class="kpi-back-text">Directed <strong>40+ cross-functional team members</strong> through complex system architecture alignment and comprehensive change management strategies.</div>
+          <div class="kpi-tap-hint">tap to flip back →</div>
+        </div>
+      </div>
+    </div>
+    <div class="kpi" onclick="flipKpi(this)">
+      <div class="kpi-inner">
+        <div class="kpi-face kpi-front">
+          <div class="kpi-value">94<span>%</span></div>
+          <div class="kpi-label">System Adoption</div>
+          <div class="kpi-sub">↑ SAP ECC to S/4HANA Migration</div>
+          <div class="kpi-glow"></div>
+          <div class="kpi-tap-hint">tap for details →</div>
+        </div>
+        <div class="kpi-face kpi-back">
+          <div class="kpi-back-text">Achieved a <strong>94% system adoption rate</strong> post-go-live with zero unplanned business downtime for a leading multinational software corporation.</div>
+          <div class="kpi-tap-hint">tap to flip back →</div>
+        </div>
+      </div>
+    </div>
+    <div class="kpi" onclick="flipKpi(this)">
+      <div class="kpi-inner">
+        <div class="kpi-face kpi-front">
+          <div class="kpi-value">25<span>%</span></div>
+          <div class="kpi-label">Velocity Increase</div>
+          <div class="kpi-sub">↑ Agile Leadership</div>
+          <div class="kpi-glow"></div>
+          <div class="kpi-tap-hint">tap for details →</div>
+        </div>
+        <div class="kpi-face kpi-back">
+          <div class="kpi-back-text">Drove a <strong>25% increase in team velocity</strong> across multiple high-performing pods by functioning as a dedicated Scrum Master and leveraging Jira.</div>
+          <div class="kpi-tap-hint">tap to flip back →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE TIMELINE -->
+  <div class="card exp-card reveal">
+    <div class="card-title">Career Timeline</div>
+    <div class="timeline" id="timeline">
+
+      <div class="tl-item open" onclick="toggle(this)">
+        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-company">Ernst & Young LLP</div>
+          <div class="tl-role">Senior Consultant - Project Manager | Scrum Master</div>
+          <div class="tl-period">April 2024 → Present</div>
+          <div class="expand-hint">▾ click to expand</div>
+          <div class="tl-details">
+            <div style="font-size:12px;color:var(--muted);line-height:1.7;margin-top:8px;">
+              Lead cross-functional global teams delivering high-stakes enterprise software solutions, specialising in large-scale ERP transformations (SAP ECC to S/4HANA) and Agentic AI platform implementations.
+            </div>
+            <div style="margin-top:10px;">
+              <span class="tl-pill">SAP S/4HANA Migration</span>
+              <span class="tl-pill">Agentic AI Platform</span>
+              <span class="tl-pill">RAID Management</span>
+              <span class="tl-pill">Agile Ceremonies</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item" onclick="toggle(this)">
+        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-company">KPMG Global Services</div>
+          <div class="tl-role">Consultant - Project Manager | Scrum Master</div>
+          <div class="tl-period">March 2022 → March 2024</div>
+          <div class="expand-hint">▾ click to expand</div>
+          <div class="tl-details">
+            <div style="font-size:12px;color:var(--muted);line-height:1.7;margin-top:8px;">
+              Managed Agile delivery teams for high-priority technology programs in a Tier-1 Global Investment Bank and led enterprise IT initiatives for a Fortune 500 Energy leader.
+            </div>
+            <div style="margin-top:10px;">
+              <span class="tl-pill">Kanban & Scrum</span>
+              <span class="tl-pill">Executive Stakeholder Alignment</span>
+              <span class="tl-pill">Resource Planning</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item" onclick="toggle(this)">
+        <div class="tl-left"><div class="tl-dot muted"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-company">Tata Consultancy Services</div>
+          <div class="tl-role">Scrum Master</div>
+          <div class="tl-period">April 2018 → January 2022</div>
+          <div class="expand-hint">▾ click to expand</div>
+          <div class="tl-details">
+            <div style="font-size:12px;color:var(--muted);line-height:1.7;margin-top:8px;">
+              Accelerated delivery velocity by 20% and boosted sprint predictability by 15% through meticulous Agile metric analysis and Product Owner alignment.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item" onclick="toggle(this)">
+        <div class="tl-left"><div class="tl-dot muted"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-company">Convergys & Sutherland Global Services</div>
+          <div class="tl-role">Technical Support Specialist</div>
+          <div class="tl-period">Oct 2015 → April 2018</div>
+          <div class="expand-hint">▾ click to expand</div>
+          <div class="tl-details">
+            <div style="font-size:12px;color:var(--muted);line-height:1.7;margin-top:8px;">
+              Provided dedicated technical support, troubleshooting, and issue resolution within fast-paced enterprise environments.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="card skills-card reveal">
+    <div class="card-title">Core Competencies</div>
+    <div id="skills-list">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <!-- IMPACT METRICS -->
+  <div class="card impact-card reveal">
+    <div class="card-title">Key Impact Numbers</div>
+    <div class="impact-grid">
+      <div class="impact-item" onclick="openModal('velocity')">
+        <div class="impact-num">+25%</div>
+        <div class="impact-desc">Team velocity increase across Agile pods</div>
+      </div>
+      <div class="impact-item" onclick="openModal('predictability')">
+        <div class="impact-num">15%</div>
+        <div class="impact-desc">Boost in sprint predictability via data metrics</div>
+      </div>
+      <div class="impact-item" onclick="openModal('adoption')">
+        <div class="impact-num">94%</div>
+        <div class="impact-desc">SAP system adoption rate post-go-live</div>
+      </div>
+      <div class="impact-item" onclick="openModal('team')">
+        <div class="impact-num">40+</div>
+        <div class="impact-desc">Cross-functional team members led globally</div>
+      </div>
+      <div class="impact-item" onclick="openModal('downtime')">
+        <div class="impact-num">0</div>
+        <div class="impact-desc">Unplanned business downtime during SAP migration</div>
+      </div>
+      <div class="impact-item" onclick="openModal('experience')">
+        <div class="impact-num">10+</div>
+        <div class="impact-desc">Years managing end-to-end program governance</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI ASSISTANT CARD -->
+  <div class="card ai-card reveal">
+    <div class="card-title">AI-Powered Profile Assistant — Live Demo</div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="t-dot r"></div>
+        <div class="t-dot y"></div>
+        <div class="t-dot g"></div>
+        <div class="t-label">prashant-profile ~ zsh</div>
+      </div>
+      <div class="terminal-body">
+        <div class="term-line"><span class="prompt">$</span> <span class="cmd">profile --query</span> <span class="str">"key SAP migration wins"</span></div>
+        <div class="term-line" style="color:var(--muted);">→ 94% system adoption rate post-go-live | Zero unplanned business downtime | Successful ECC to S/4HANA rollout</div>
+        <div class="term-line" style="margin-top:10px;"><span class="prompt">$</span> <span class="cmd">resume --highlight</span> <span class="str">"AI product experience"</span></div>
+        <div class="term-line" style="color:var(--muted);">→ Directed full-lifecycle delivery of an enterprise-grade Agentic AI platform for a global life science firm, automating demand forecasting and vendor communication.</div>
+        <div class="term-line" style="margin-top:10px;"><span class="prompt">$</span> <span class="hi">_</span><span class="cursor"></span></div>
+      </div>
+    </div>
+    <div class="ask-input-wrap">
+      <input class="ask-input" id="askInput" placeholder='Ask anything about Prashant… e.g. "What is his Agile experience?"' />
+      <button class="ask-btn" id="askBtn" onclick="askAI()">Ask AI</button>
+    </div>
+    <div class="ai-response" id="aiResponse"></div>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div class="card awards-card reveal">
+    <div class="card-title">Certifications</div>
+    <div class="awards-row">
+      <div class="award-item">
+        <div class="award-icon">
+          <!-- Shield/Check SVG for PMP -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="M9 12l2 2 4-4"></path>
+          </svg>
+        </div>
         <div>
-            <h1 class="text-4xl font-extrabold tracking-tight text-white">
-                Prashant <span class="orange-glow">Bhole</span>
-            </h1>
-            <p class="text-slate-400 font-medium mt-2 text-sm tracking-wide uppercase">
-                Senior IT Project Manager | Scrum Master | Strategic Techno-Functional Leader
-            </p>
-            
-            <!-- Core Focus Tags -->
-            <div class="flex flex-wrap gap-2 mt-4 text-[11px] font-bold tracking-wider uppercase">
-                <span class="border border-orange-accent/60 text-[#ff7a00] px-2.5 py-1 rounded">IT Program Management</span>
-                <span class="border border-sky-500/40 text-sky-400 px-2.5 py-1 rounded">SAP S/4HANA Migration</span>
-                <span class="border border-emerald-500/40 text-emerald-400 px-2.5 py-1 rounded">Agentic AI Delivery</span>
-                <span class="border border-amber-500/40 text-amber-400 px-2.5 py-1 rounded">Agile / Scrum</span>
-                <span class="border border-purple-500/40 text-purple-400 px-2.5 py-1 rounded">Cross-functional Teams</span>
-                <span class="border border-teal-500/40 text-teal-400 px-2.5 py-1 rounded">Risk Governance (RAID)</span>
-            </div>
+          <div class="award-title">Project Management Professional (PMP)</div>
+          <div class="award-desc">PMI | Expected Q3 2026. Demonstrating comprehensive expertise in project leadership, governance, and end-to-end delivery methodologies.</div>
         </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">
+          <!-- Star/Badge SVG for CSPO -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+        <div>
+          <div class="award-title">Certified Scrum Product Owner (CSPO)</div>
+          <div class="award-desc">Scrum Alliance | Valid through Sep 2027. Championing backlog refinement and robust user story acceptance criteria to streamline execution.</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon">
+          <!-- Activity/Pulse SVG for CSM -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <div>
+          <div class="award-title">Certified ScrumMaster (CSM)</div>
+          <div class="award-desc">Scrum Alliance | Valid through Sep 2027. Facilitating all core Scrum ceremonies and championing Agile workflows in Jira and Azure DevOps.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <!-- Meta Contact Details -->
-        <div class="text-xs text-slate-400 space-y-1.5 md:text-right font-mono">
-            <div><i class="fas fa-map-marker-alt text-slate-500 mr-2"></i> Pune, India</div>
-            <div><i class="fas fa-phone text-slate-500 mr-2"></i> +91-7738119150</div>
-            <div><i class="fas fa-envelope text-slate-500 mr-2"></i> prashantbhole04@gmail.com</div>
-            <div><i class="fab fa-linkedin text-slate-500 mr-2"></i> linkedin.com/in/prashant-bhole</div>
-        </div>
-    </header>
+  <!-- EDUCATION -->
+  <div class="card edu-card reveal">
+    <div class="card-title">Education</div>
+    <div class="edu-row">
+      <div class="edu-item">
+        <div class="edu-school">University of Mumbai</div>
+        <div class="edu-degree">Bachelor of Science, Computer Science</div>
+        <div class="edu-type">UNDERGRADUATE · TECHNOLOGY</div>
+      </div>
+    </div>
+  </div>
 
-    <!-- TOP ROW: FOUR HIGHLIGHT METRICS HERO CARDS -->
-    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="dashboard-card p-6 rounded-lg relative overflow-hidden">
-            <div class="text-3xl font-extrabold text-white tracking-tight">10+</div>
-            <div class="text-xs font-semibold text-slate-400 mt-1">Years of Experience</div>
-            <div class="text-[11px] text-emerald-400 font-medium mt-3"><i class="fas fa-arrow-up text-xs mr-1"></i> Across enterprise technology & consultancies</div>
-        </div>
-        <div class="dashboard-card p-6 rounded-lg relative overflow-hidden">
-            <div class="text-3xl font-extrabold orange-glow tracking-tight">40+</div>
-            <div class="text-xs font-semibold text-slate-400 mt-1">Engineers Led (Indirectly)</div>
-            <div class="text-[11px] text-sky-400 font-medium mt-3">Cross-functional global transformation pods</div>
-        </div>
-        <div class="dashboard-card p-6 rounded-lg relative overflow-hidden">
-            <div class="text-3xl font-extrabold text-white tracking-tight">0</div>
-            <div class="text-xs font-semibold text-slate-400 mt-1">Unplanned Downtime</div>
-            <div class="text-[11px] text-teal-400 font-medium mt-3">During complex SAP S/4HANA cutovers</div>
-        </div>
-        <div class="dashboard-card p-6 rounded-lg relative overflow-hidden">
-            <div class="text-3xl font-extrabold text-sky-400 tracking-tight">94%</div>
-            <div class="text-xs font-semibold text-slate-400 mt-1">System Adoption Rate</div>
-            <div class="text-[11px] text-purple-400 font-medium mt-3">Achieved post go-live platform landing</div>
-        </div>
-    </section>
+</div>
 
-    <!-- MIDDLE ROW: CAREER TIMELINE & CORE COMPETENCIES GRAPH -->
-    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        <!-- Left Side: Career Timeline Column (7 Cols) -->
-        <div class="dashboard-card p-6 rounded-lg lg:col-span-7 space-y-6">
-            <div class="text-xs uppercase font-bold tracking-widest text-slate-400 flex items-center gap-2">
-                <span class="w-1.5 h-1.5 bg-orange-accent rounded-full"></span> Career Timeline
-            </div>
-            
-            <div class="relative border-l border-slate-800 pl-4 space-y-6 ml-2 text-xs">
-                <!-- EY -->
-                <div class="relative">
-                    <div class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-slate-900 border border-orange-accent"></div>
-                    <div class="font-bold text-white text-sm">Ernst & Young LLP</div>
-                    <div class="text-[#ff7a00] font-medium mt-0.5">Senior Consultant - Project Manager | Scrum Master</div>
-                    <div class="text-slate-500 font-mono mt-0.5">April 2024 - Present</div>
-                    <p class="text-slate-400 mt-2 leading-relaxed">Directed end-to-end program management governance for large-scale SAP ECC to S/4HANA migrations and Agentic AI product delivery footprints targeting autonomous enterprise forecasting workflows[cite: 1].</p>
-                    <div class="flex flex-wrap gap-1.5 mt-3 text-[10px] font-mono text-slate-300">
-                        <span class="bg-slate-800 px-2 py-0.5 rounded">Productivity +25%</span>
-                        <span class="bg-slate-800 px-2 py-0.5 rounded">RAID Logs</span>
-                        <span class="bg-slate-800 px-2 py-0.5 rounded">Zero Downtime</span>
-                    </div>
-                </div>
+<!-- ── DETAIL MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this) closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕ close</button>
+    <div class="modal-eyebrow" id="modalEyebrow">Detail</div>
+    <div class="modal-title" id="modalTitle">Title</div>
+    <div class="modal-subtitle" id="modalSubtitle"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
 
-                <!-- KPMG -->
-                <div class="relative">
-                    <div class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-700"></div>
-                    <div class="font-bold text-white text-sm">KPMG Global Services</div>
-                    <div class="text-slate-400 font-medium mt-0.5">Consultant - Project Manager | Scrum Master</div>
-                    <div class="text-slate-500 font-mono mt-0.5">March 2022 - March 2024</div>
-                    <p class="text-slate-400 mt-2 leading-relaxed">Managed delivery cycles for high-priority technology programs within Tier-1 Investment Banking systems and global energy provider application stacks[cite: 1].</p>
-                </div>
+<script>
+function flipKpi(el) {
+  const wasFlipped = el.classList.contains('flipped');
+  document.querySelectorAll('.kpi.flipped').forEach(card => card.classList.remove('flipped'));
+  if (!wasFlipped) el.classList.add('flipped');
+}
 
-                <!-- TCS -->
-                <div class="relative">
-                    <div class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-700"></div>
-                    <div class="font-bold text-white text-sm">Tata Consultancy Services</div>
-                    <div class="text-slate-400 font-medium mt-0.5">Scrum Master</div>
-                    <div class="text-slate-500 font-mono mt-0.5">April 2018 - January 2022</div>
-                    <p class="text-slate-400 mt-2 leading-relaxed">Accelerated feature delivery by 20% and heightened milestone predictability by 15% using optimized metrics tracking charts inside Jira engines[cite: 1].</p>
-                </div>
-            </div>
-        </div>
+// ── Detail Modal: data + logic ──
+const MODAL_DATA = {
+  velocity: {
+    eyebrow: "Agile Leadership",
+    title: "25% Velocity Increase",
+    subtitle: "Across multiple high-performing pods",
+    body: `<p>Functioning as a dedicated Scrum Master at Ernst & Young LLP, Prashant drove a <strong>25% increase in team velocity</strong>. He leveraged Jira for rigorous backlog grooming and sprint tracking, facilitating all core Scrum ceremonies to keep the teams highly aligned and productive.</p>`
+  },
+  predictability: {
+    eyebrow: "Data-Driven Approach",
+    title: "15% Sprint Predictability Boost",
+    subtitle: "Via Metric Analysis",
+    body: `<p>At Tata Consultancy Services, Prashant meticulously analysed Agile metrics — such as burndown charts and cumulative flow charts — during team retrospectives. This data-driven approach allowed the team to adjust forecasting accuracy, ultimately boosting sprint predictability by <strong>15%</strong>.</p>`
+  },
+  adoption: {
+    eyebrow: "ERP Transformation",
+    title: "94% System Adoption Rate",
+    subtitle: "SAP ECC to S/4HANA Migration",
+    body: `<p>Guiding a 40+ person cross-functional team, Prashant successfully executed the end-to-end program management governance for a complex SAP ECC to S/4HANA transformation. His comprehensive change management strategies resulted in a <strong>94% system adoption rate</strong> post-go-live.</p>`
+  },
+  team: {
+    eyebrow: "Global Leadership",
+    title: "40+ Resources Led",
+    subtitle: "Cross-Functional Collaboration",
+    body: `<p>Prashant consistently steers cross-functional teams of <strong>40+ resources</strong>, including engineers, QA, and stakeholders. He excels at synchronising multi-tiered deployment schedules across staging, QA, and production environments.</p>`
+  },
+  downtime: {
+    eyebrow: "Risk Management",
+    title: "Zero Unplanned Downtime",
+    subtitle: "Complex SAP Rollout",
+    body: `<p>By owning and aggressively managing the RAID log, Prashant proactively identified critical-path dependencies between legacy SAP architecture and modern integrations. This diligent risk governance eliminated blockers before they impacted delivery, achieving <strong>zero unplanned business downtime</strong>.</p>`
+  },
+  experience: {
+    eyebrow: "Career Span",
+    title: "10+ Years Experience",
+    subtitle: "IT Project Management & Scrum Master",
+    body: `<p>With over a decade of experience, Prashant combines Agile servant leadership across Scrum, Kanban, and Lean frameworks with robust project governance. He builds trust at every level, from engineering pods to executive boardrooms.</p>`
+  }
+};
 
-        <!-- Right Side: Core Competencies Skills Metric Bar Stack (5 Cols) -->
-        <div class="dashboard-card p-6 rounded-lg lg:col-span-5 space-y-5 text-xs">
-            <div class="text-xs uppercase font-bold tracking-widest text-slate-400 flex items-center gap-2">
-                <span class="w-1.5 h-1.5 bg-orange-accent rounded-full"></span> Core Competencies
-            </div>
-            
-            <div class="space-y-3.5">
-                <div>
-                    <div class="flex justify-between text-slate-300 font-medium mb-1">
-                        <span>Technical Program Management</span><span>95%</span>
-                    </div>
-                    <div class="w-full bg-slate-800 h-1.5 rounded-full"><div class="bg-sky-500 h-1.5 rounded-full" style="width: 95%"></div></div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-slate-300 font-medium mb-1">
-                        <span>SAP S/4HANA Migration</span><span>92%</span>
-                    </div>
-                    <div class="w-full bg-slate-800 h-1.5 rounded-full"><div class="bg-sky-500 h-1.5 rounded-full" style="width: 92%"></div></div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-slate-300 font-medium mb-1">
-                        <span>Agentic AI Product Delivery</span><span>88%</span>
-                    </div>
-                    <div class="w-full bg-slate-800 h-1.5 rounded-full"><div class="bg-indigo-500 h-1.5 rounded-full" style="width: 88%"></div></div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-slate-300 font-medium mb-1">
-                        <span>Agile Ceremonies & Velocity Optimization</span><span>94%</span>
-                    </div>
-                    <div class="w-full bg-slate-800 h-1.5 rounded-full"><div class="bg-sky-500 h-1.5 rounded-full" style="width: 94%"></div></div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-slate-300 font-medium mb-1">
-                        <span>Risk Governance (RAID logs)</span><span>90%</span>
-                    </div>
-                    <div class="w-full bg-slate-800 h-1.5 rounded-full"><div class="bg-orange-accent h-1.5 rounded-full" style="width: 90%"></div></div>
-                </div>
-            </div>
-        </div>
-    </section>
+function openModal(key) {
+  const d = MODAL_DATA[key];
+  if (!d) return;
+  document.getElementById('modalEyebrow').textContent = d.eyebrow;
+  document.getElementById('modalTitle').textContent = d.title;
+  document.getElementById('modalSubtitle').textContent = d.subtitle;
+  document.getElementById('modalBody').innerHTML = d.body;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    <!-- LOWER ROW: KEY IMPACT NUMBERS GRID & AI-POWERED LIVE INTERACTIVE TERMINAL PROFILE ASSISTANT -->
-    <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        <!-- Impact Numbers Matrix Grid Block -->
-        <div class="lg:col-span-5 grid grid-cols-2 gap-4">
-            <div class="dashboard-card p-5 rounded-lg text-center flex flex-col justify-center">
-                <div class="text-2xl font-black text-white orange-glow">+25%</div>
-                <div class="text-[11px] text-slate-400 mt-1">Team Delivery Velocity Increase</div>
-            </div>
-            <div class="dashboard-card p-5 rounded-lg text-center flex flex-col justify-center">
-                <div class="text-2xl font-black text-white text-sky-400">94%</div>
-                <div class="text-[11px] text-slate-400 mt-1">Platform System Adoption Rate</div>
-            </div>
-            <div class="dashboard-card p-5 rounded-lg text-center flex flex-col justify-center">
-                <div class="text-2xl font-black text-white text-teal-400">+20%</div>
-                <div class="text-[11px] text-slate-400 mt-1">TCS Pod Acceleration Delta</div>
-            </div>
-            <div class="dashboard-card p-5 rounded-lg text-center flex flex-col justify-center">
-                <div class="text-2xl font-black text-white text-purple-400">35+</div>
-                <div class="text-[11px] text-slate-400 mt-1">Engineers Managed in AI Delivery</div>
-            </div>
-        </div>
+// ── Toggle timeline items ──
+function toggle(el) {
+  el.classList.toggle('open');
+}
 
-        <!-- Terminal View Simulation Component Section Block -->
-        <div class="dashboard-card rounded-lg lg:col-span-7 overflow-hidden flex flex-col justify-between border border-slate-800">
-            <!-- Top Controls Bar Strip -->
-            <div class="bg-slate-900 px-4 py-2.5 border-b border-slate-800 flex justify-between items-center text-xs text-slate-400 font-mono">
-                <div class="flex items-center gap-1.5">
-                    <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-                    <span class="ml-2 text-[11px] text-slate-500">prashant-profile ~ claude-sonnet</span>
-                </div>
-            </div>
-            <!-- Dynamic Outputs Interactive Display Content Core Frame -->
-            <div class="p-5 font-mono text-xs space-y-4 bg-slate-950/80 flex-grow min-h-[160px]">
-                <div>
-                    <span class="text-emerald-400">$</span> <span class="text-white">profile --query "Key transformation win at EY"</span>
-                    <p class="text-slate-400 mt-1 pl-3 text-[11px] border-l border-slate-800">→ SAP ECC to S/4HANA Migration executed with zero unplanned business downtime and a 94% final system adoption metric across 40+ resources[cite: 1].</p>
-                </div>
-                <div>
-                    <span class="text-emerald-400">$</span> <span class="text-white">resume --highlight "AI experience frameworks"</span>
-                    <p class="text-slate-400 mt-1 pl-3 text-[11px] border-l border-slate-800">→ Directed full-lifecycle engineering for an enterprise-grade Agentic AI platform orchestrating automated demand prediction models using autonomous agents[cite: 1].</p>
-                </div>
-            </div>
-            <!-- Input Console Interactive Form Bar Tray Row -->
-            <div class="p-3 bg-slate-900 border-t border-slate-800 flex gap-2">
-                <input type="text" readonly placeholder="Ask anything about Prashant... e.g. 'Is he a fit for an Enterprise PM role?'" class="bg-slate-950 text-slate-400 border border-slate-800 rounded px-3 py-1.5 text-xs flex-grow outline-none">
-                <button class="bg-orange-accent hover:bg-orange-600 transition text-white font-bold text-xs px-4 py-1.5 rounded whitespace-nowrap">Ask AI</button>
-            </div>
-        </div>
-    </section>
+// ── Skills data + bars ──
+const skills = [
+  { name: 'Agile / Scrum / Kanban', pct: 95 },
+  { name: 'SAP S/4HANA Migration', pct: 90 },
+  { name: 'Agentic AI Delivery', pct: 85 },
+  { name: 'End-to-End Program Mgmt', pct: 95 },
+  { name: 'Risk & Governance (RAID)', pct: 92 },
+  { name: 'Jira & Azure DevOps', pct: 90 },
+  { name: 'Stakeholder Alignment', pct: 94 },
+  { name: 'OKR & Process Imprvmnt', pct: 88 }
+];
 
-    <!-- ACCREDITATIONS & AWARDS COMPACT STRIP PANEL ROW -->
-    <section class="space-y-4">
-        <div class="text-xs uppercase font-bold tracking-widest text-slate-400 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 bg-orange-accent rounded-full"></span> Credentials & Certifications
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-            <div class="dashboard-card p-4 rounded-lg flex items-start gap-3">
-                <i class="fas fa-certificate text-amber-500 text-lg mt-0.5"></i>
-                <div>
-                    <h4 class="font-bold text-white">Project Management Professional (PMP)</h4>
-                    <p class="text-slate-500 mt-0.5 font-medium">PMI | Expected Candidate target Q3 2026[cite: 1]</p>
-                </div>
-            </div>
-            <div class="dashboard-card p-4 rounded-lg flex items-start gap-3">
-                <i class="fas fa-shield-halved text-sky-400 text-lg mt-0.5"></i>
-                <div>
-                    <h4 class="font-bold text-white">Certified Scrum Master (CSM)</h4>
-                    <p class="text-slate-500 mt-0.5 font-medium">Scrum Alliance | Active Validation Lifecycle through 2027[cite: 1]</p>
-                </div>
-            </div>
-            <div class="dashboard-card p-4 rounded-lg flex items-start gap-3">
-                <i class="fas fa-cubes text-emerald-400 text-lg mt-0.5"></i>
-                <div>
-                    <h4 class="font-bold text-white">Certified Scrum Product Owner (CSPO)</h4>
-                    <p class="text-slate-500 mt-0.5 font-medium">Scrum Alliance | Active Validation Lifecycle through 2027[cite: 1]</p>
-                </div>
-            </div>
-        </div>
-    </section>
+const skillsEl = document.getElementById('skills-list');
+skills.forEach(s => {
+  skillsEl.innerHTML += `
+    <div class="skill-row">
+      <div class="skill-name">${s.name}</div>
+      <div class="skill-bar-bg"><div class="skill-bar-fill" data-pct="${s.pct}"></div></div>
+      <div class="skill-pct">${s.pct}%</div>
+    </div>`;
+});
 
-    <!-- EDUCATION GRID FOOTER PANELS BASE STRIP -->
-    <section class="space-y-4">
-        <div class="text-xs uppercase font-bold tracking-widest text-slate-400 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 bg-orange-accent rounded-full"></span> Education
-        </div>
-        <div class="bg-slate-900 border border-slate-800 p-5 rounded-lg text-xs flex justify-between items-center">
-            <div>
-                <h4 class="font-bold text-white text-sm">Bachelor of Science, Computer Science</h4>
-                <p class="text-slate-400 mt-0.5 font-medium">University of Mumbai, India[cite: 1]</p>
-            </div>
-            <span class="text-slate-500 font-mono text-[11px] bg-slate-950 px-2.5 py-1 rounded border border-slate-800">Graduated</span>
-        </div>
-    </section>
+// Animate bars on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      setTimeout(() => {
+        e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          bar.style.width = bar.dataset.pct + '%';
+        });
+      }, 300); // slight delay for visual impact
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.skills-card').forEach(c => observer.observe(c));
 
+// ── Scroll reveal ──
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { 
+      e.target.classList.add('visible'); 
+      revealObs.unobserve(e.target); 
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ── AI Q&A engine — self-contained, no server or API key needed ──
+const KB = [
+  {
+    keys: ['agile', 'scrum', 'kanban', 'sprint', 'velocity', 'ceremonies'],
+    a: "Prashant is highly experienced in Agile execution. He has functioned as a dedicated Scrum Master, driving a 25% increase in team velocity and a 15% boost in sprint predictability. He is skilled in Jira, backlog grooming, and facilitating all core Scrum ceremonies."
+  },
+  {
+    keys: ['sap', 'erp', 's/4hana', 'ecc', 'migration'],
+    a: "At Ernst & Young, Prashant successfully executed end-to-end program management for a large-scale SAP ECC to S/4HANA migration. He guided a 40+ person team, achieving a 94% system adoption rate post-go-live with zero unplanned business downtime."
+  },
+  {
+    keys: ['ai', 'agentic', 'artificial intelligence', 'platform'],
+    a: "Prashant directed the full-lifecycle delivery of an enterprise-grade Agentic AI platform for a global life science firm. Managing a 35-person team, he deployed autonomous agents to automate demand forecasting and predictive logistics workflows."
+  },
+  {
+    keys: ['certifications', 'csm', 'cspo', 'pmp'],
+    a: "Prashant is a Certified ScrumMaster (CSM) and Certified Scrum Product Owner (CSPO), both valid through Sep 2027. He is also actively pursuing his Project Management Professional (PMP) certification, expected in Q3 2026."
+  },
+  {
+    keys: ['education', 'degree', 'university'],
+    a: "Prashant holds a Bachelor of Science in Computer Science from the University of Mumbai."
+  }
+];
+
+const FALLBACK = "That is a great question to explore with Prashant! His resume highlights exceptional strengths in end-to-end program governance, large-scale SAP S/4HANA migrations, Agentic AI delivery, and Agile servant leadership. Try asking about his ERP transformations or his Scrum expertise.";
+
+function matchKB(question) {
+  const q = question.toLowerCase();
+  let best = null, bestScore = 0;
+  KB.forEach(entry => {
+    let score = 0;
+    entry.keys.forEach(k => { if (q.includes(k)) score += k.split(' ').length; });
+    if (score > bestScore) { bestScore = score; best = entry; }
+  });
+  return bestScore > 0 ? best.a : FALLBACK;
+}
+
+function askAI() {
+  const input = document.getElementById('askInput');
+  const btn = document.getElementById('askBtn');
+  const out = document.getElementById('aiResponse');
+  const question = input.value.trim();
+  if (!question) return;
+
+  btn.disabled = true;
+  out.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+
+  setTimeout(() => {
+    const answer = matchKB(question);
+    out.innerHTML = `<span class="ai-tag">// AI →</span> ${answer}`;
+    btn.disabled = false;
+  }, 650);
+
+  input.value = '';
+}
+
+document.getElementById('askInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') askAI();
+});
+</script>
 </body>
 </html>
